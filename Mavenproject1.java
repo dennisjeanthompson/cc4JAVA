@@ -1,0 +1,134 @@
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ */
+
+package com.mycompany.mavenproject1;
+
+import java.util.Scanner;
+
+public class Mavenproject1 {
+
+   
+
+
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+        while (true) {
+            System.out.println("Stacks(1) or Queues(2) or End(3)");
+            int userInput = scanner.nextInt();
+
+            if (userInput == 1) {
+                System.out.print("Enter array size (n): ");
+                int n = scanner.nextInt();
+                int[] array = new int[n];
+                int top = -1;
+
+                while (true) {
+                    System.out.print("Enter 'push' or 'pop': ");
+                    String operation = scanner.next();
+
+                    if (operation.equals("push")) {
+                        if (top == n - 1) {
+                            System.out.println("Stack Overflow");
+                        } else {
+                            System.out.print("Enter integer value: ");
+                            int value = scanner.nextInt();
+                            array[++top] = value;
+                        }
+                    } else if (operation.equals("pop")) {
+                        if (top == -1) {
+                            System.out.println("Stack Underflow");
+                        } else {
+                            int poppedElement = array[top--];
+                            System.out.println("Popped element: " + poppedElement);
+                        }
+                    } else {
+                        break;
+                    }
+
+                    System.out.print("Enter 'c' (continue) or 'end': ");
+                    String choice = scanner.next();
+                    if (choice.equals("end")) {
+                        break;
+                    }
+                }
+
+                System.out.print("FINAL array: ");
+                for (int i = 0; i <= top; i++) {
+                    System.out.print(array[i]);
+                    if (i < top) {
+                        System.out.print(", ");
+                    }
+                }
+                System.out.println();
+
+            } else if (userInput == 2) {
+                System.out.println("Enter the size of the array (Array Size):");
+                int ni = scanner.nextInt();
+                int[] array = new int[ni];
+                int pointer1 = 0;
+                int pointer2 = 0;
+
+                System.out.println("Given: Maximum index = " + (ni - 1));
+
+                while (true) {
+                    System.out.println("OPERATION:");
+                    System.out.println("1. Enqueue(value)");
+                    System.out.println("2. Dequeue()");
+
+                    int operation = scanner.nextInt();
+
+                    if (operation == 1) {
+                        System.out.println("Enter integer value to enqueue:");
+                        int value = scanner.nextInt();
+                        if (array[pointer2] == 0) {
+                            array[pointer2] = value;
+                            pointer2 = (pointer2 + 1) % ni;
+                            System.out.println("Output: " + value);
+                        } else {
+                            System.out.println("Queue is full. Cannot enqueue.");
+                        }
+                    } else if (operation == 2) {
+                        if (array[pointer1] != 0) {
+                            int dequeuedValue = array[pointer1];
+                            array[pointer1] = 0;
+                            pointer1 = (pointer1 + 1) % ni;
+                            System.out.println("Output: " + dequeuedValue);
+                        } else {
+                            System.out.println("Queue is empty. Cannot dequeue.");
+                        }
+                    } else {
+                        System.out.println("Invalid operation.");
+                        break;
+                    }
+
+                    System.out.print("FINAL ARRAY: ");
+                    boolean firstElement = true;
+                    for (int i = 0; i < ni; i++) {
+                        if (array[i] != 0) {
+                            if (!firstElement) {
+                                System.out.print(", ");
+                            }
+                            System.out.print(array[i]);
+                            firstElement = false;
+                        }
+                    }
+                    System.out.println();
+
+                    System.out.println("(1) Continue or (2) End?");
+                    int continueChoice = scanner.nextInt();
+                    if (continueChoice == 2) {
+                        break;
+                    }
+                }
+            } else if (userInput == 3) {
+                break;
+            }
+        }
+
+        System.out.println("Program ended.");
+        scanner.close();
+    }
+}
+
